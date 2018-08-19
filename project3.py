@@ -24,6 +24,7 @@ def fsm(input):
     state = 0
     counter = 0
     result = []
+    #print("state: " + str(state))
     for each in input:
         if (len(result) != 0 and result[-1] == " "):
             del result[-1]
@@ -97,21 +98,22 @@ def fsm(input):
                     state = 8
             elif (state == 7):
                 result.insert(-1, " ")
-                # result.append(" ")
                 result.append(char)
+                print("state: " + str(state) + char)
+
                 state = 1
             elif (state == 8):
                 result.insert(-1, " ")
-                # result.append(" ")
                 result.append(char)
+                print("state: " + str(state) + char)
                 state = 2
             elif (state == 9):
-                result.append(" ")
                 result.append(char)
+                result.append(" ")
+                print("state: " + str(state) + char)
                 state = 0
-    # del result[0]
+
     result = ''.join(result)
-    print(len(result))
     print(result)
 
 
