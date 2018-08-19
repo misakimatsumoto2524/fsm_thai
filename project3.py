@@ -21,29 +21,25 @@ def fsm(input):
     state_5 = V3 + C3 + V1 + C1
     state_6 = C3 + V1 + C1
 
-    counter = 0
-    for each in input:
-        for char in each:
-            counter += 1
-            print(char + " "+ ": " +str(counter))
-    print(counter)
-
-
     state = 0
     counter = 0
     result = []
     for each in input:
+        if (len(result) != 0 and result[-1] == " "):
+            del result[-1]
+        result.append("\n")
+        state = 0
         for char in each:
-            if (char in state_0):
+            if (char in state_0 and state == 0):
                 result.append(char)
                 if (char in V1):
                     state = 1
                 else:
                     state = 2
-            if (char in state_1 and state == 1):
+            elif (char in state_1 and state == 1):
                 result.append(char)
                 state = 2
-            if (char in state_2 and state == 2):
+            elif (char in state_2 and state == 2):
                 result.append(char)
                 if (char in C2):
                     state = 3
@@ -59,7 +55,7 @@ def fsm(input):
                     state = 7
                 if (char in C1):
                     state = 8
-            if (char in state_3 and state == 3):
+            elif (char in state_3 and state == 3):
                 result.append(char)
                 if (char in V2):
                     state = 4
@@ -69,7 +65,7 @@ def fsm(input):
                     state = 6
                 if (char in C3):
                     state = 9
-            if (char in state_4 and state == 4):
+            elif (char in state_4 and state == 4):
                 result.append(char)
                 if (char in T):
                     state = 5
@@ -81,7 +77,7 @@ def fsm(input):
                     state = 7
                 if (char in C1):
                     state = 8
-            if (char in state_5 and state == 5):
+            elif (char in state_5 and state == 5):
                 result.append(char)
                 if (char in V3):
                     state = 6
@@ -91,7 +87,7 @@ def fsm(input):
                     state = 7
                 if (char in C1):
                     state = 8
-            if (char in state_6 and state == 6):
+            elif (char in state_6 and state == 6):
                 result.append(char)
                 if (char in C3):
                     state = 9
@@ -99,23 +95,24 @@ def fsm(input):
                     state = 7
                 if (char in C1):
                     state = 8
-            if (state == 7):
-                result[-1] = " "
-                state = 1
-                break
-            if (state == 8):
-                result[-1] = " "
-                state = 2
-                break
-            if (state == 9):
-                state = 0
-                break
-            else:
+            elif (state == 7):
+                result.insert(-1, " ")
+                # result.append(" ")
                 result.append(char)
-                pass
+                state = 1
+            elif (state == 8):
+                result.insert(-1, " ")
+                # result.append(" ")
+                result.append(char)
+                state = 2
+            elif (state == 9):
+                result.append(" ")
+                result.append(char)
+                state = 0
+    # del result[0]
     result = ''.join(result)
-    # print(len(result))
-    # print(result)
+    print(len(result))
+    print(result)
 
 
 def fst():
