@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 skeleton3.py
+python3 project3.py
