@@ -1,4 +1,4 @@
-#!/opt/python-2.7/bin/python -S
+#!/opt/python-2.7/bin/python2.7 -S
 #  -*- coding: utf-8 -*-
 
 # Script to copy standard input to standard output, one line at a time.
@@ -10,8 +10,8 @@ import sys
 # This is apparently for Python rogues, but I got it from SO and it seems to work.
 # http://stackoverflow.com/questions/11741574/how-to-set-the-default-encoding-to-utf-8-in-python
 # A key trick is the -S business above in the shebang line.
-# sys.setdefaultencoding("UTF-8")
-# print (sys.getdefaultencoding())
+sys.setdefaultencoding("UTF-8")
+# print sys.getdefaultencoding()
 import site
 
 V1 = u"\u0E40\u0E41\u0E42\u0E43\u0E44"
@@ -24,14 +24,14 @@ T  = u"\u0E48\u0E49\u0E4A\u0E4B"
 V3 = u"\u0E32\u0E2D\u0E22\u0E27"
 C3 = u"\u0E07\u0E19\u0E21\u0E14\u0E1A\u0E01\u0E22\u0E27"
 
-# print (V1)
-# print (C1)
+# print V1
+# print C1
 # print C2
 # print V2
 # print T
 # print V3
 # print C3
-#
+
 # print V1 + C1 + C2
 
 def fst(I):
@@ -40,7 +40,7 @@ def fst(I):
     # return u":"+ I
     return I
 
-# print (u"<html><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><body>")
+print u"<html><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><body>"
 
 # Readline is a method of stdin, which is in the standard object sys.
 # It returns the empty string on EOF.
@@ -54,10 +54,10 @@ while line:
     # a slice is used to print all characters in the string but the last.
     # Otherwise, each input line would be output with two line terminators.
     result = fst(line[:-1])
-
-    print (result + u"<br/>")
+    
+    print result + u"<br/>"
 
     # Next line.
     line = sys.stdin.readline()
 
-print (u"</body></html>")
+print u"</body></html>"

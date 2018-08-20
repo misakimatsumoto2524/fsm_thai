@@ -17,17 +17,17 @@ def print_output(input):
 
 
 def fsm(input):
-    V1 = u"\u0E40\u0E41\u0E42\u0E43\u0E44"
-    C1 = u"\u0E01\u0E02\u0E03\u0E04\u0E05\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0B\u0E0C\u0E0D\u0E0E\u0E0F" \
-         + u"\u0E10\u0E11\u0E12\u0E13\u0E14\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1A\u0E1B\u0E1C\u0E1D\u0E1E\u0E1F" \
-         + u"\u0E20\u0E21\u0E22\u0E23\u0E24\u0E25\u0E26\u0E27\u0E28\u0E29\u0E2A\u0E2B\u0E2C\u0E2D\u0E2E"
-    C2 = u"\u0E23\u0E25\u0E27\u0E19\u0E21"
-    V2 = u"\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E31\u0E47"
-    T  = u"\u0E48\u0E49\u0E4A\u0E4B"
-    V3 = u"\u0E32\u0E2D\u0E22\u0E27"
-    C3 = u"\u0E07\u0E19\u0E21\u0E14\u0E1A\u0E01\u0E22\u0E27"
+    V1 = "\u0E40\u0E41\u0E42\u0E43\u0E44"
+    C1 = "\u0E01\u0E02\u0E03\u0E04\u0E05\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0B\u0E0C\u0E0D\u0E0E\u0E0F"\
+         + "\u0E10\u0E11\u0E12\u0E13\u0E14\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1A\u0E1B\u0E1C\u0E1D\u0E1E\u0E1F"\
+         + "\u0E20\u0E21\u0E22\u0E23\u0E24\u0E25\u0E26\u0E27\u0E28\u0E29\u0E2A\u0E2B\u0E2C\u0E2D\u0E2E"
+    C2 = "\u0E23\u0E25\u0E27\u0E19\u0E21"
+    V2 = "\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E31\u0E47"
+    T  = "\u0E48\u0E49\u0E4A\u0E4B"
+    V3 = "\u0E32\u0E2D\u0E22\u0E27"
+    C3 = "\u0E07\u0E19\u0E21\u0E14\u0E1A\u0E01\u0E22\u0E27"
 
-    state_0 = V1+ C1
+    state_0 = V1 + C1
     state_1 = C1
     state_2 = C2 + V2 + T + V3 + C3 + V1 + C1
     state_3 = V2 + T + V3 + C3
@@ -36,9 +36,9 @@ def fsm(input):
     state_6 = C3 + V1 + C1
 
     state = 0
-    counter = 0
     result = []
     #print("state: " + str(state))
+
     for each in input:
         if (len(result) != 0 and result[-1] == " "):
             del result[-1]
@@ -47,85 +47,101 @@ def fsm(input):
         for char in each:
             if (char in state_0 and state == 0):
                 result.append(char)
+                print(str(state) +"→")
                 if (char in V1):
                     state = 1
-                else:
+                elif(char in C1):
                     state = 2
+
             elif (char in state_1 and state == 1):
+                print(str(state) +"→")
                 result.append(char)
                 state = 2
+
             elif (char in state_2 and state == 2):
+                print(str(state) +"→")
                 result.append(char)
                 if (char in C2):
                     state = 3
-                if (char in V2):
+                elif (char in V2):
                     state = 4
-                if (char in T):
+                elif (char in T):
                     state = 5
-                if (char in V3):
+                elif (char in V3):
                     state = 6
-                if (char in C3):
+                elif (char in C3):
                     state = 9
-                if (char in V1):
+                elif (char in V1):
                     state = 7
-                if (char in C1):
+                elif (char in C1):
                     state = 8
-            elif (char in state_3 and state == 3):
-                result.append(char)
-                if (char in V2):
-                    state = 4
-                if (char in T):
-                    state = 5
-                if (char in V3):
-                    state = 6
-                if (char in C3):
-                    state = 9
-            elif (char in state_4 and state == 4):
-                result.append(char)
-                if (char in T):
-                    state = 5
-                if (char in V3):
-                    state = 6
-                if (char in C3):
-                    state = 9
-                if (char in V1):
-                    state = 7
-                if (char in C1):
-                    state = 8
-            elif (char in state_5 and state == 5):
-                result.append(char)
-                if (char in V3):
-                    state = 6
-                if (char in C3):
-                    state = 9
-                if (char in V1):
-                    state = 7
-                if (char in C1):
-                    state = 8
-            elif (char in state_6 and state == 6):
-                result.append(char)
-                if (char in C3):
-                    state = 9
-                if (char in V1):
-                    state = 7
-                if (char in C1):
-                    state = 8
-            elif (state == 7):
-                result.insert(-1, " ")
-                result.append(char)
 
-                state = 1
-            elif (state == 8):
+            elif (char in state_3 and state == 3):
+                print(str(state) +"→")
+                result.append(char)
+                if (char in V2):
+                    state = 4
+                elif (char in T):
+                    state = 5
+                elif (char in V3):
+                    state = 6
+                elif (char in C3):
+                    state = 9
+
+            elif (char in state_4 and state == 4):
+                print(str(state) +"→")
+                result.append(char)
+                if (char in T):
+                    state = 5
+                elif (char in V3):
+                    state = 6
+                elif (char in C3):
+                    state = 9
+                elif (char in V1):
+                    state = 7
+                elif (char in C1):
+                    state = 8
+
+            elif (char in state_5 and state == 5):
+                print(str(state) +"→")
+                result.append(char)
+                if (char in V3):
+                    state = 6
+                elif (char in C3):
+                    state = 9
+                elif (char in V1):
+                    state = 7
+                elif (char in C1):
+                    state = 8
+
+            elif (char in state_6 and state == 6):
+                print(str(state) +"→")
+                result.append(char)
+                if (char in C3):
+                    state = 9
+                elif (char in V1):
+                    state = 7
+                elif (char in C1):
+                    state = 8
+
+            if (state == 7):
+                print(str(state) +"→")
                 result.insert(-1, " ")
-                result.append(char)
+                state = 1
+
+            if (state == 8):
+                print(str(state) +"→")
+                result.insert(-1, " ")
                 state = 2
-            elif (state == 9):
-                result.append(char)
+
+            if (state == 9):
+                print(str(state) +"→")
                 result.append(" ")
                 state = 0
 
+
     result = ''.join(result)
-    # print_output(result)
+    print_output(result)
 
 def fst():
     folder = "folder"
