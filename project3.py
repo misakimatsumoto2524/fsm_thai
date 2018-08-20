@@ -2,6 +2,20 @@
 import os
 import codecs
 
+
+def print_output(input):
+    input = input.split("\n")
+    input = list(filter(None, input))
+    print("<html>")
+    print("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />")
+    print("<body>")
+    for i in input:
+        line = i + "<br />"
+        print(line)
+    print("</body>")
+    print("</html>")
+
+
 def fsm(input):
     V1 = u"\u0E40\u0E41\u0E42\u0E43\u0E44"
     C1 = u"\u0E01\u0E02\u0E03\u0E04\u0E05\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0B\u0E0C\u0E0D\u0E0E\u0E0F" \
@@ -99,23 +113,19 @@ def fsm(input):
             elif (state == 7):
                 result.insert(-1, " ")
                 result.append(char)
-                print("state: " + str(state) + char)
 
                 state = 1
             elif (state == 8):
                 result.insert(-1, " ")
                 result.append(char)
-                print("state: " + str(state) + char)
                 state = 2
             elif (state == 9):
                 result.append(char)
                 result.append(" ")
-                print("state: " + str(state) + char)
                 state = 0
 
     result = ''.join(result)
-    print(result)
-
+    # print_output(result)
 
 def fst():
     folder = "folder"
